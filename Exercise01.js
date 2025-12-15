@@ -22,3 +22,17 @@ console.log(result);
 
 result = reformatName("Robert", "Duvall"); 
 console.log(result);
+
+var x = 1;
+var y = 0;
+var z = 0;
+
+if (x < 2){
+  y = 5;
+}
+else {
+  y = 10;
+}
+z = 5;
+
+console.log(y,z);
