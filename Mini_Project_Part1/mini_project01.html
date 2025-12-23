@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mini Project 01 Prototype</title>
+    <link rel="stylesheet" href="mini_project01.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <h1>Filter Lab Prototype</h1>
+        <p class="subheading">Load an image, preview it on the canvas, and try filters.</p>
+      </header>
+
+      <section class="panel">
+        <h2>Preview Canvas</h2>
+        <canvas id="previewCanvas" width="420" height="260">
+          Your browser does not support the canvas element.
+        </canvas>
+      </section>
+
+      <section class="panel">
+        <h2>Load Image</h2>
+        <input
+          id="imageInput"
+          class="file-input"
+          type="file"
+          accept="image/*"
+        />
+      </section>
+
+      <section class="panel">
+        <h2>Choose Filter</h2>
+        <div class="button-row">
+          <button id="redBtn" type="button">Red Filter</button>
+          <button id="rainbowBtn" type="button">Rainbow Filter</button>
+          <button id="blueBtn" type="button">Blue Filter</button>
+          <button id="grayBtn" type="button">Grayscale</button>
+          <button id="invertBtn" type="button">Invert</button>
+          <button id="sepiaBtn" type="button">Sepia</button>
+          <button id="spotlightBtn" type="button">Spotlight</button>
+          <button id="windowBtn" type="button">Window Pane</button>
+          <button id="waveBtn" type="button">Wave Distortion</button>
+          <button id="pixelateBtn" type="button">Pixelate</button>
+        </div>
+        <button id="resetBtn" class="reset" type="button">Reset Image</button>
+      </section>
+    </main>
+
+    <script src="SimpleImage.js"></script>
+    <script src="mini_project01.js"></script>
+  </body>
+</html>
