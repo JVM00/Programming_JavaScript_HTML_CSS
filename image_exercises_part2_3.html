@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Image Exercises Part 2 & 3</title>
+  <style>canvas{display:block;margin:12px 0;border:1px solid #ccc}</style>
+</head>
+<body>
+  <h3>Part 2 — 200×200 colored square (fixed)</h3>
+  <canvas id="square" width="200" height="200"></canvas>
+
+  <h3>Part 3 — addBorder demo (chapel.png)</h3>
+  <canvas id="borderCanvas"></canvas>
+
+  <script>
+    // Part 2: draw corrected 200x200 square with quadrants
+    function drawColoredSquare(canvasId) {
+      const c = document.getElementById(canvasId);
+      const ctx = c.getContext('2d');
+      const w = c.width, h = c.height;
+      const im = ctx.createImageData(w, h);
+      const d = im.data;
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          const idx = (y * w + x) * 4;
+          if (x < w / 2 && y < h / 2) {
+            // top-left: red
+            d[idx] = 255; d[idx+1] = 0; d[idx+2] = 0;
+          } else if (x >= w / 2 && y < h / 2) {
+            // top-right: green
+            d[idx] = 0; d[idx+1] = 255; d[idx+2] = 0;
+          } else if (x < w / 2 && y >= h / 2) {
+            // bottom-left: magenta (red+blue)
+            d[idx] = 255; d[idx+1] = 0; d[idx+2] = 255;
+          } else {
+            // bottom-right: blue
+            d[idx] = 0; d[idx+1] = 0; d[idx+2] = 255;
+          }
+          d[idx+3] = 255;
+        }
+      }
+      ctx.putImageData(im, 0, 0);
+    }
+
+    // Part 3: setBlack(pixel) equivalent for ImageData and addBorder
+    function setBlackAt(data, idx) {
+      data[idx] = 0; data[idx+1] = 0; data[idx+2] = 0;
+    }
+
+    function addBorderToImageData(im, thickness) {
+      const w = im.width, h = im.height, d = im.data;
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          if (x < thickness || x >= w - thickness || y < thickness || y >= h - thickness) {
+            const idx = (y * w + x) * 4;
+            setBlackAt(d, idx);
+          }
+        }
+      }
+    }
+
+    function processBorderDemo(imgSrc, canvasId, thickness) {
+      const img = new Image();
+      img.src = imgSrc;
+      img.onload = () => {
+        const c = document.getElementById(canvasId);
+        c.width = img.width; c.height = img.height;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        const im = ctx.getImageData(0, 0, c.width, c.height);
+        addBorderToImageData(im, thickness);
+        ctx.putImageData(im, 0, 0);
+      };
+      img.onerror = () => {
+        const c = document.getElementById(canvasId);
+        c.width = 400; c.height = 200;
+        const ctx = c.getContext('2d');
+        ctx.font = '14px sans-serif';
+        ctx.fillText('Failed to load ' + imgSrc + '. Place the image in the same folder.', 10, 20);
+      };
+    }
+
+    // Run demos
+    drawColoredSquare('square');
+    // Change 'chapel.png' to the image you want to test; must be in same folder
+    processBorderDemo('chapel.png', 'borderCanvas', 10);
+  </script>
+</body>
+</html>

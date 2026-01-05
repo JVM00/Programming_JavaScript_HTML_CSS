@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Top Right Corner</title>
+  <style>canvas{display:block;margin-bottom:16px;border:1px solid #ccc}</style>
+</head>
+<body>
+  <h3>picture (chapel.png)</h3>
+  <canvas id="c1"></canvas>
+  <h3>picture2 (smalllion.jpg)</h3>
+  <canvas id="c2"></canvas>
+
+  <script>
+    function topRightCorner(cornerWidth, cornerHeight, imageData, red, green, blue) {
+      const w = imageData.width;
+      const h = imageData.height;
+      const d = imageData.data;
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          if (x >= w - cornerWidth && y < cornerHeight) {
+            const idx = (y * w + x) * 4;
+            d[idx] = red;
+            d[idx + 1] = green;
+            d[idx + 2] = blue;
+          }
+        }
+      }
+    }
+
+    function processCanvas(imgSrc, canvasId, cornerWidth, cornerHeight, r, g, b) {
+      const img = new Image();
+      img.src = imgSrc;
+      img.onload = () => {
+        const c = document.getElementById(canvasId);
+        c.width = img.width; c.height = img.height;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        const im = ctx.getImageData(0, 0, c.width, c.height);
+        topRightCorner(cornerWidth, cornerHeight, im, r, g, b);
+        ctx.putImageData(im, 0, 0);
+      };
+      img.onerror = () => console.error('Failed to load', imgSrc);
+    }
+
+    processCanvas('chapel.png', 'c1', 30, 60, 255, 255, 0);
+    processCanvas('smalllion.jpg', 'c2', 125, 20, 255, 0, 0);
+  </script>
+</body>
+</html>

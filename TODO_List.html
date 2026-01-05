@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Interactive TODO List</title>
+    <link rel="stylesheet" href="TODO_List.css">
+  </head>
+  <body>
+    <h1 id="myHeader">TO DO List</h1>
+
+    <!-- STEPs 1 and 2 below here  -->
+    <input type="button" id="addButton" value="Add" onclick="addTask()" />
+    <input type="text" id="input" placeholder="enter task ..." />
+
+    <hr>
+    <ul id="tasks">
+      <li>
+        <input type="button" class="done" onclick="markDone(this.parentNode)" value="&#x2713;" />
+        <input type="button" class="remove" onclick="remove(this.parentNode)" value="&#x2715;" />
+        <input type="button" class="important" onclick="important(this.parentNode)" value="!" />
+        make todo list
+      </li>
+    </ul>
+    <hr>
+    <!-- STEPs 8 and 9 below here  -->
+    <div id="divabout" JVM></div>
+    <input type="button" id="aboutBtn" value="About" onclick="doAbout()" />
+
+    <!-- STEP 13 below here  -->
+    <input type="button" id="clearAboutBtn" value="Clear" onclick="clearAbout()" />
+
+    <script src="TODO_List.js"></script>
+  </body>
+</html>

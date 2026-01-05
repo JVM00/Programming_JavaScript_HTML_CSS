@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Green Screen Prototype</title>
+    <link rel="stylesheet" href="greenscreen.css">
+  </head>
+  <body>
+    <h1>Green Screen Prototype</h1>
+    <div class="canvas-row">
+      <canvas id="fgCanvas"></canvas>
+      <canvas id="bgCanvas"></canvas>
+    </div>
+    <div class="controls">
+      <label for="fgInput">Foreground</label>
+      <input id="fgInput" type="file" accept="image/*" onchange="loadForegroundImage()">
+      <label for="bgInput">Background</label>
+      <input id="bgInput" type="file" accept="image/*" onchange="loadBackgroundImage()">
+    </div>
+    <div class="buttons">
+      <input type="button" value="Create Composite" onclick="doGreenScreen()">
+      <input type="button" value="Clear Canvases" onclick="clearCanvas()">
+    </div>
+    <script src="SimpleImage.js"></script>
+    <script src="greenscreen.js"></script>
+  </body>
+</html>

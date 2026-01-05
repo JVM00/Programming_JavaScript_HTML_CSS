@@ -1,0 +1,60 @@
+/* Style HTML elements */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f5f5f5;
+  margin: 20px;
+  line-height: 1.6;
+}
+
+h1 {
+  text-align: center;
+}
+
+p {
+  max-width: 800px;
+}
+
+/* Existing class for image boxes */
+.img-box {
+  margin: 10px 0;
+}
+
+.img-box img {
+  max-width: 250px;
+  border-radius: 8px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* NEW: Style by ID */
+#main-title {
+  color: #E61D1D;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* NEW: Style by class for headings */
+.section-heading {
+  color: #8e44ad;
+  margin-top: 30px;
+  border-bottom: 2px solid #8e44ad;
+  padding-bottom: 5px;
+}
+
+/* NEW: Style table */
+.interests-table {
+  border-collapse: collapse;
+  background-color: #ffffff;
+  margin-top: 15px;
+}
+
+.interests-table th,
+.interests-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.interests-table th {
+  background-color: #eaeaea;
+}

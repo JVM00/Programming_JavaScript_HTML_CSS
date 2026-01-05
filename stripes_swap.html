@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Stripes / Swap / Blue→Yellow</title></head>
+<body>
+  <h4>Part 1 — Stripes (drew.png)</h4>
+  <canvas id="c1"></canvas>
+  <h4>Part 2 — Swap Red/Green (chapel.png)</h4>
+  <canvas id="c2"></canvas>
+  <h4>Part 3 — Blue → Yellow (duke.png)</h4>
+  <canvas id="c3"></canvas>
+
+  <script>
+    function verticalStripesImageData(im) {
+      const w = im.width;
+      const h = im.height;
+      const d = im.data;
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          const idx = (y * w + x) * 4;
+          if (x < w / 3) d[idx] = 255;
+          else if (x < 2 * w / 3) d[idx + 1] = 255;
+          else d[idx + 2] = 255;
+        }
+      }
+    }
+
+    function swapRedGreenPixelData(im) {
+      const w = im.width, h = im.height, d = im.data;
+      for (let i = 0; i < d.length; i += 4) {
+        const r = d[i], g = d[i + 1];
+        d[i] = g; d[i + 1] = r;
+      }
+    }
+
+    function blueToYellowImageData(im) {
+      const w = im.width, h = im.height, d = im.data;
+      for (let i = 0; i < d.length; i += 4) {
+        const r = d[i], g = d[i + 1], b = d[i + 2];
+        if (b > 120 && b > r + 30 && b > g + 30) {
+          d[i] = 255; d[i + 1] = 255; d[i + 2] = 0;
+        }
+      }
+    }
+
+    function process(imgSrc, canvasId, fn) {
+      const img = new Image();
+      img.src = imgSrc;
+      img.onload = () => {
+        const c = document.getElementById(canvasId);
+        c.width = img.width; c.height = img.height;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        const im = ctx.getImageData(0, 0, c.width, c.height);
+        fn(im);
+        ctx.putImageData(im, 0, 0);
+      };
+      img.onerror = () => console.error('Failed to load', imgSrc);
+    }
+
+    process('dinos.png', 'c1', verticalStripesImageData);
+    process('chapel.png', 'c2', swapRedGreenPixelData);
+    process('duke_blue_devil.png', 'c3', blueToYellowImageData);
+  </script>
+</body>
+</html>

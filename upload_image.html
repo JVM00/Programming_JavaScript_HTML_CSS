@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Upload Image Prototype</title>
+    <link rel="stylesheet" href="upload_image.css">
+  </head>
+  <body>
+    <h1>Upload Image Prototype</h1>
+    <div class="canvas-row">
+      <canvas id="originalCanvas"></canvas>
+      <canvas id="grayCanvas"></canvas>
+    </div>
+    <div class="controls">
+      <label for="imageInput">Filename:</label>
+      <input id="imageInput" type="file" accept="image/*" onchange="upload()">
+      <input type="button" value="Make Gray" onclick="makeGray()">
+    </div>
+    <script src="SimpleImage.js"></script>
+    <script src="upload_image.js"></script>
+  </body>
+</html>

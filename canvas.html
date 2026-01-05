@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Canvas Color Practice</title>
+    <link rel="stylesheet" href="canvas.css">
+  </head>
+  <body>
+    <h1>Canvas practice</h1>
+
+    <canvas id="artCanvas" width="360" height="230"></canvas>
+
+    <div class="controls">
+      <input type="button" value="Make Sky Blue" onclick="makeBlue()">
+      <label class="color-picker">
+        <span>Choose a color:</span>
+        <input type="color" id="canvasColor" value="#ff6600" onchange="doColorChange()">
+      </label>
+    </div>
+
+    <div class="slider-control">
+      <label for="sizeSlider">Square size:</label>
+      <input type="range" id="sizeSlider" min="20" max="140" value="70" oninput="doSquare()">
+    </div>
+
+    <script src="canvas.js"></script>
+  </body>
+</html>
